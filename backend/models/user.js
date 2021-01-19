@@ -18,10 +18,6 @@ const UserSchema = new Schema({
 	password: {
 		type: String
 	},
-	toPlay: {
-		type: Boolean,
-		required: [true, 'toPlay field is required.']
-    },
 })
 
 // Creating a table within database with the defined schema
