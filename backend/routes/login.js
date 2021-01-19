@@ -54,6 +54,10 @@ router.post('/register', async (req, res) => {
             let userNum = users.length;
             if (userNum===0){
                 console.log('Register: New User');
+                if (req.body.data.name.indexOf("@") !== -1){
+                    console.log('User name cannot contain @')
+                    return res.status(400).send({status: 'Failed', msg:'User name cannot contain @'});
+                }
                 req.body.data.id = uuidv4();
                 const user = new User(req.body.data);
 
