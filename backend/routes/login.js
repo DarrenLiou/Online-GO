@@ -8,23 +8,34 @@ router.use(bodyParser.json());
 router.post('/login', async (req, res) => {
     console.log("Login is evoked!");
     // res.send('Hello, World!');
-    if (req.body.name.length === 0){
+    if (req.body.data.name.length === 0){
         res.status(405).send({status: 'Failed', msg:'User name cannot be empty'});
     }
     else{
         try{
-            const users = await User.find({name:req.body.name}).exec()
-            if (users.length===0){
-                console.log('New User');
+            const users = await User.find({name:req.body.data.name}).exec()
+            let userNum = users.length;
+            if (userNum===0){
+                console.log('Login: New User');
 
                 res.status(400).send({status: 'Failed', msg:'User does not exist'});
             }
+            else if(userNum===1){
+                // users must be length 1
+                // await User.updateOne({name: req.body.data.name}, {$set: {toPlay:false}})
+                if (req.body.data.password === users[0].password){
+                    console.log("login: Successfully login");
+                    res.status(200).send({status: 'Success', id:users[0].id, msg:'Successfully login'});
+                }else{
+                    console.log("login: Wrong Password");
+                    res.status(400).send({status: 'Failed', msg:'Wrong Password'});
+                }
+            }
             else{
-                await User.updateOne({name: req.body.name}, {$set: {toPlay:false}})
-                res.status(200).send({status: 'Success', id:users[0].id, msg:'Successfully login'});
+                throw(`there are ${userNum} users with name: ${req.body.data.name}`)
             }
         }catch(err){
-            console.log('Login connect to db WRONG');
+            console.log(err, 'Login connect to db WRONG');
             res.status(503).send({status: 'Failed', msg:'DB wrong'});
         }
     }
@@ -34,24 +45,39 @@ router.post('/register', async (req, res) => {
     console.log("Register is evoked!");
     // console.log(req.body);
     // Notice name
-    if (req.body.name.length === 0){
+    if (req.body.data.name.length === 0){
         res.status(405).send({status: 'Failed', msg:'User name cannot be empty'});
     }
     else{
         try{
-            const users = await User.find({name:req.body.name}).exec()
-            if (users.length===0){
-                console.log('New User');
-                req.body.id = uuidv4();
-                req.body.toPlay = false;
-                const user = new User(req.body);
-                await user.save();
-                
+            const users = await User.find({name:req.body.data.name}).exec()
+            let userNum = users.length;
+            if (userNum===0){
+                console.log('Register: New User');
+                req.body.data.id = uuidv4();
+                const user = new User(req.body.data);
+
+                console.log('user saved')
+                try{
+                    await user.save();
+                }catch(err){
+                    console.log(err)
+                }
+                console.log('Success registration');
                 res.status(200).send({status: 'Success', id:user.id, msg:'Success registration'});
             }
-            else{
-                await User.updateOne({name: req.body.name}, {$set: {toPlay:false}})
-                res.status(200).send({status: 'Success', id:users[0].id, msg:'Exists'});
+            else if(userNum===1){
+                // await User.updateOne({name: req.body.data.name}, {$set: {toPlay:false}})
+                if (req.body.data.password === users[0].password){
+                    console.log("Register: Successfully login");
+                    res.status(200).send({status: 'Success', id:users[0].id, msg:'Exists'});
+                }else{
+                    console.log("Register: Wrong Password");
+                    res.status(400).send({status: 'Failed', msg:'Wrong Password'});
+                }
+                // res.status(200).send({status: 'Success', id:users[0].id, msg:'Exists'});
+            }else{
+                throw(`there are ${userNum} users with name: ${req.body.data.name}`)
             }
         }catch(err){
             console.log('Register connect to db WRONG');

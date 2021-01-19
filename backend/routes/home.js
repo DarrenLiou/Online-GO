@@ -27,7 +27,8 @@ router.get('/find/:userId', async (req, res) => {
             // player not chosen
             return res.status(400).send({status: 'Failed', msg:'Cannot find any opponent'});
         }
-        await SendBoardData();
+        try{await SendBoardData();}
+        catch(err){console.log("router find",err)}
         return res.status(200).send({status: 'Success', msg:'Entering new game'})
     }
     else{
@@ -35,25 +36,12 @@ router.get('/find/:userId', async (req, res) => {
         return res.status(400).send({status: 'Failed', msg:'Cannot find any opponent'});
     }
 
-    // await User.updateOne({id: userId}, {$set: {toPlay: true}})
-    // const onlineUsers = await User.find({toPlay: true}).exec();
-    // const names = await User.find({id: userId}).exec() // find who I am
-
-    
-    // const opponentList = onlineUsers.filter(item => {
-    //     return item.id !== userId;
-    // });
-    // console.log(opponentList);
-    // res.status(200).send({status: 'Success', msg:'Successfully paired'});
-
-    //we can random select
-    // res.status(200).send({status: 'Success', msg:'Entering new game'})
-    
 });
 
 async function SendBoardData(p1, p2){
     // p1 and p2 are {name, uuidv4}
-    const allGames = await Game.find().exec()
+    try{const allGames = await Game.find().exec()}
+    catch(err){console.log("Game count finding",err)}
     const [p1Name, p1UserId] = p1.split("@");
     const [p2Name, p2UserId] = p2.split("@");
     // we can random black and white

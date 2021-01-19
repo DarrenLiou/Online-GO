@@ -20,11 +20,11 @@ router.post('/move/:boardId/:userId', async (req, res) => {
     if (games[0].black.id !== userId && games[0].white.id !== userId ){
         return res.status(400).send({status: 'Failed', msg:'User is incorrect'});
     }
-    const status = req.body.flag
+    const status = req.body.data.flag
     switch(status){
         case 'step':{
-            const row = req.body.pos.row
-            const col = req.body.pos.col
+            const row = req.body.data.pos.row
+            const col = req.body.data.pos.col
             await Game.updateOne({ID: boardId}, 
                 {$set: {board: [...games[0].board, `${row}-${col}`], 
                         stepCount:games[0].stepCount+1 }})

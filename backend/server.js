@@ -37,8 +37,8 @@ db.once('open', () => {
 });
 
 app.use('/', loginRouter);
-app.use('/game', gameRouter);
-app.use('/home', homeRouter)
+app.use('/user', homeRouter)
+app.use('/user/game', gameRouter);
 
 
 const server = http.createServer(app);
