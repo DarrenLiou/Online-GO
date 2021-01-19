@@ -17,7 +17,7 @@ const Grid = props => {
         const curPlayer = props.curPlayer
         if (state === 0) {
             setColor((curPlayer === 0)? black_stone : white_stone)
-            e.target.style["opacity"] = 1;
+            e.target.style["opacity"] = 0.5;
         }
     }
 
@@ -35,10 +35,12 @@ const Grid = props => {
         if (curPlayer === 0) { // BLACK
             record[props.row][props.column] = 1
             props.setCurPlayer(1)
+            e.target.style["opacity"] = 1;
         }
         else {
             record[props.row][props.column] = 2
             props.setCurPlayer(0)
+            e.target.style["opacity"] = 1;
         }
         props.setRecord(record)
         props.setCurPosition({row: props.row, column: props.column})
