@@ -1,18 +1,15 @@
-// import logo from './logo.svg';
 import React, {useState, useEffect} from "react";
 import { Login, Register } from './components/Login.js';
 import { UserMenu} from './components/UserMenu.js';
 import { Link, Route, Switch, useHistory } from "react-router-dom";
 import { PrivateRoute} from './components/privateRoute.js';
-// import './App.css';
-// var client;
+import { useClientSocket } from './useClientSocket.js';
+
 export default function App() {
-  // const [IsLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState("");
-  useEffect(() => {
-      const client = new WebSocket(`ws://localhost:4000/${userId}`);
-      
-  }, [userId])
+
+  const { opponent, stepReceived, boardId, color } = useClientSocket();
+
   const history = useHistory()
   return (
     <div>

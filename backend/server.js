@@ -43,20 +43,24 @@ app.use('/user/game', gameRouter);
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({server});
-let clientSockets = {}
+export let clientSockets = {}
 
 wss.on('connection', (ws, req) => {
+    // req is now uuidv4 after sha256
+    console.log('When websocket client connected, reqUrl:', req.url)
     let clientId = req.url.split('/')[1]; // removing '/'
-    console.log(clientId);
     clientSockets[clientId] = ws;
-    for (let key in clientSockets){
-        clientSockets[key].send(JSON.stringify(['connect!', clientId]));
-    }
+    console.log('All keys in client Socket', Object.keys(clientSockets));
+    clientSockets[clientId].send(JSON.stringify(['Connect', 'Web socket connected']));
+
+    ws.on('message', data => {
+        console.log('Data from client', data);
+    })
     // ws.send(JSON.stringify(['connect!', req.url]))
 })
+
+
 
 server.listen(port, () => 
     console.log(`Example app listening on port ${port}`),
 );
-
-export {clientSockets};

@@ -7,7 +7,6 @@ router.use(bodyParser.json());
 
 router.post('/login', async (req, res) => {
     console.log("Login is evoked!");
-    // res.send('Hello, World!');
     if (req.body.data.name.length === 0){
         res.status(405).send({status: 'Failed', msg:'User name cannot be empty'});
     }
@@ -43,8 +42,6 @@ router.post('/login', async (req, res) => {
 
 router.post('/register', async (req, res) => {
     console.log("Register is evoked!");
-    // console.log(req.body);
-    // Notice name
     if (req.body.data.name.length === 0){
         res.status(405).send({status: 'Failed', msg:'User name cannot be empty'});
     }
@@ -61,7 +58,6 @@ router.post('/register', async (req, res) => {
                 req.body.data.id = uuidv4();
                 const user = new User(req.body.data);
 
-                console.log('user saved')
                 try{
                     await user.save();
                 }catch(err){
@@ -89,5 +85,6 @@ router.post('/register', async (req, res) => {
         }
     }
 });
+
 
 export default router;

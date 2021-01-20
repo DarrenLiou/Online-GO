@@ -12,13 +12,13 @@ function Login(props){
         e.preventDefault()
         let userData = {name: userName, password: password};
         try{
-            // console.log('----------')
             const hashPassword = await sha256(password);
             userData.password = hashPassword;
-            console.log(`plain-text: ${password}\nhash: ${hashPassword}`)
+            // console.log(`plain-text: ${password}\nhash: ${hashPassword}`)
             const res = await userLogin(userData);
             //res is like {status: "Failed", msg: "User does not exist"}
             if (res.status === 'Success'){
+                console.log('My userId:', res.id)
                 setUserId(res.id);
                 history.push('/user');
             }
@@ -50,11 +50,11 @@ function Register(props){
         let userData = {name: userName, password: password, level: level};
         const hashPassword = await sha256(password);
         userData.password = hashPassword;
-        console.log(`plain-text: ${password}\nhash: ${hashPassword}`)
+        // console.log(`plain-text: ${password}\nhash: ${hashPassword}`)
         try{
             const res = await userRegister(userData);
-            console.log(res)
             if (res.status === 'Success'){
+                console.log('My userId:', res.id)
                 setUserId(res.id);
                 history.push('/user');
             }
