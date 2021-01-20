@@ -78,6 +78,9 @@ function Register(props){
                 setUserId(res.id);
                 history.push('/user');
             }
+            else if(res.status === 'Failed'){
+                console.log(res.msg);
+            }
         }catch(err){
             console.log(err)
             console.log('Authentication Error!')
