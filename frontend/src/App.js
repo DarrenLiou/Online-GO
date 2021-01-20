@@ -9,23 +9,36 @@ import go_img from './img/go-game.jpg'
 
 export default function App() {
   const [userId, setUserId] = useState("");
+  
 
-  const { opponent, stepReceived, boardId, color } = useClientSocket();
-
+  const { opponent, stepReceived, boardId, color, isPlaying } = useClientSocket();
   const history = useHistory()
+  useEffect(()=>{
+      if(isPlaying){
+        history.push('/user/game')
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPlaying])
+  
   return (
     <div>
-      {userId? <></> : Menu()}
+      {/* {(displayHomepage && userId === "") ? Menu(): <></>} */}
 
       <Switch>
+      <Route exact path='/'>
+        <Menu />
+      </Route>
         <Route exact path="/login">
-          <Login setUserId={setUserId} history={history}/>
+          <Login setUserId={setUserId} history={history} />
         </Route>
         <Route exact path="/register">
-          <Register setUserId={setUserId} history={history}/>
+          <Register setUserId={setUserId} history={history} />
         </Route>
 
-        <PrivateRoute path="/user" userId={userId} component={UserMenu}/>
+        <PrivateRoute path="/user" userId={userId} isPlaying={isPlaying} 
+        component={UserMenu} color={color} opponent={opponent} stepReceived={stepReceived}
+          boardId={boardId}
+        />
       </Switch>
     </div>
   );
@@ -38,8 +51,12 @@ const Menu = () => {
       <img src={go_img} id="figure-1" />
       <nav className="navbar navbar-light">
         <ul className="nav navbar-nav">
-          <Link to="/login" className="nav-item"><li>Login</li></Link>
-          <Link to="/register" className="nav-item"><li>Register</li></Link>
+          <li>
+            <Link to="/login" className="nav-item">Login</Link>
+          </li>
+          <li>
+            <Link to="/register" className="nav-item">Register</Link>
+          </li>
         </ul>
       </nav>
     </>
