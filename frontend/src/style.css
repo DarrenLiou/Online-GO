@@ -28,12 +28,12 @@
     width: 90%;
     border: none;
     border-radius: 50%;
-    z-index: 3;
+    z-index: 4;
     background-image: transparent;
     opacity: 0;
 }
 
-.grid.star {
+.grid.star::after {
 }
 
 .board-column {
