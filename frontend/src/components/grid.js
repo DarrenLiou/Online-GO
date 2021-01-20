@@ -26,11 +26,13 @@ const Grid = props => {
         }
     }
 
+
     const handleOnClick = e => {
         const record = props.record
         const curPlayer = props.curPlayer
         const color = props.color
         const curPosition = props.curPosition
+        const stepCount = props.stepCount
 
         if (curPlayer === 0) { // BLACK
             record[props.row][props.column] = 1

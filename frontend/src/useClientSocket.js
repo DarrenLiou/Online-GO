@@ -9,7 +9,7 @@ const useClientSocket = () => {
   const [stepReceived, setStepReceived] = useState({row: -1, col: -1});
   const [boardId, setBoardId] = useState(-1);
   const [color, setColor] = useState('');
-
+  const [isPlaying, setIsPlaying] = useState(false);
   client.onmessage = (message) => {
     const { data } = message
     const [task, payload] = JSON.parse(data)
@@ -25,10 +25,13 @@ const useClientSocket = () => {
         setOpponent(payload.opponentName);
         setBoardId(payload.boardId);
         setColor(payload.color);
+        setIsPlaying(true);
         // console.log(opponent, boardId, color);
         break
       }
       case 'Step': {
+        // payload: {stoneColor: playerColor, pos: {row: row, col: col}}
+        setStepReceived(payload.pos);
         break
       }
       default:{
@@ -46,6 +49,7 @@ const useClientSocket = () => {
     stepReceived,
     boardId,
     color,
+    isPlaying
   }
 }
 
