@@ -4,6 +4,7 @@ import {makeMove} from '../axios.js';
 import Board from '../components/board.js'
 import Line from '../components/line.js'
 import Index from '../components/index.js'
+import Star from '../components/star.js'
 import white_stone from '../img/white-stone.png'
 
 import '../style.css'
@@ -38,8 +39,9 @@ const Go = (props) => {
                 <Board boardSize={boardSize} record={record} setRecord={updateRecord} curPlayer={curPlayer} 
                 setCurPlayer={updateCurPlayer} curPosition={curPosition} setCurPosition={updateCurPosition}
                 color={color} setColor={updateColor} />
-                <Line boardSize={boardSize - 1} />
+                <Line boardSize={boardSize} />
                 <Index boardSize={boardSize} />
+                <Star boardSize={boardSize} />
             </div>
         </div>
     )

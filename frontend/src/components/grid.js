@@ -53,12 +53,8 @@ const Grid = props => {
         props.setCurPosition({row: props.row, column: props.column})
     }
 
-    if (props.row % 6 === 3 && props.column % 6 === 3)
-        return <img src={props.color[props.row][props.column]} className="grid star"
-                onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleOnClick} />
-    else
-        return <img src={props.color[props.row][props.column]} className="grid"
-                onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleOnClick} />
+    return <img src={props.color[props.row][props.column]} className="grid"
+            onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleOnClick} />
 }
 
 export default Grid
