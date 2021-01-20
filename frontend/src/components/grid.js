@@ -37,14 +37,14 @@ const Grid = props => {
     const handleOnClick = e => {
         if (myColor === 'black') { // BLACK
             record[row][column] = stepCount;
-            // e.target.style["opacity"] = 1;
+            e.target.style["opacity"] = 1;
             // if (myRow !== -1 && myColumn !== -1)
             //     color[curPosition.row][curPosition.column] = white_stone       
             stone[row][column] = black_stone_focus     
         }
         else { // WHITE
             record[row][column] = stepCount;
-            // e.target.style["opacity"] = 1;
+            e.target.style["opacity"] = 1;
             stone[row][column] = white_stone_focus     
         }
         setMeToPlay(false);
