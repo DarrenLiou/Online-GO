@@ -49,7 +49,7 @@ export default function App() {
 const Menu = () => {
   return (
     <>
-      <h1 className="title" >GO game</h1>
+      <h1 className="title glow-on-hover" >GO game</h1>
       <img src={go_img} id="figure-1" />
       <nav className="navbar navbar-light">
         <ul className="nav navbar-nav">

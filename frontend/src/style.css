@@ -4,6 +4,11 @@
 
 body {
     background-image: url("./img/background.jpg");
+    font-family: "Marker Felt";
+}
+
+*:focus {
+    outline: none;
 }
 
 .title {
@@ -16,7 +21,7 @@ body {
 
 .navbar {
     position: relative;
-    top: 10px;
+    top: 20px;
     display: flex;
     justify-content: center;
 }
@@ -61,6 +66,80 @@ nav li:hover {
     box-shadow: 7px 7px 3px;
     display: block;
     margin: 0 auto;
+}
+
+.form {
+    margin: 0 auto;
+    padding: 40px;
+    top: 10px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-list {
+    align-items: center;
+}
+
+.form-item {
+    margin: auto;
+    font-size: 50px;
+    padding: 15px;
+    font-family: "Marker Felt";
+    float: right;
+}
+
+.form-input {
+    margin-left: 20px;
+    float: right;
+    padding: 10px 50px;
+    padding-left: 10px;
+    border-color: red;
+    font-size: 20px;
+    font-family: "Marker Felt";
+}
+
+.button {
+    width: 50%;
+    justify-content: center;
+    font-family: "Marker Felt";
+    font-size: 24px;
+    padding: 80px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-color: black;
+    background-image: url("./img/button.png");
+    background-repeat: no-repeat;
+    background-size: 110% 110%;
+    background-position: center 40%;
+    border-radius: 70%;
+    box-shadow: 1px 4px 3px;
+    margin: 50px 30px;
+}
+
+.button:hover {
+    background-image: url("./img/button-hover.jpg");
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.user-menu {
+    margin: 0 auto;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-menu .button {
+    margin: 30px;
+}
+
+.user-menu-text {
+    color: black;
+    text-decoration: none;
+    text-shadow: 1px 1px gray;
 }
 
 .board-root {
@@ -139,14 +218,14 @@ nav li:hover {
 }
 
 .index {
-    margin: auto;
     width: 90%;
-    height: 90%;
+    height: 89%;
     display: grid;
     grid-template-columns: repeat(var(--BOARD_SIZE), 1fr);
     position: absolute;
-    z-index: 1;
+    margin: auto;
     text-align: center;
+    z-index: 1;
 }
 
 .index-left {
@@ -179,7 +258,7 @@ nav li:hover {
 .index-bottom {
     width: 100%;
     height: 100%;
-    top: 99%;
+    top: 100%;
     right: 0;
     display: grid;
     position: absolute;
@@ -204,7 +283,7 @@ nav li:hover {
 .star-row1 {
     width: 100%;
     height: 94.9%;
-    left: 15.25%;
+    left: 15.15%;
     top: 11.2%;
     display: grid;
     position: absolute;
@@ -214,7 +293,7 @@ nav li:hover {
 .star-row2 {
     width: 100%;
     height: 94.9%;
-    left: 46.8%;
+    left: 46.75%;
     top: 11.2%;
     display: grid;
     position: absolute;
@@ -237,4 +316,63 @@ nav li:hover {
     z-index: 1;
     font-size: 60px;
     opacity: 1;
+}
+
+.glow-on-hover {
+    width: 75%;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 1;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
 }

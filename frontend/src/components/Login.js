@@ -40,13 +40,22 @@ function Login(props){
     }
 
     return (
-        <form>
-            <label htmlFor="username">Username : </label>
-            <input type="text" id='userName' onChange={(e) => setUserName(e.target.value)} /><br/>
-            <label htmlFor="password">Password : </label>
-            <input type="password" id='password' onChange={(e) => setPassword(e.target.value)} /><br/>
-            <button onClick={handleLogin}>Login</button>
-        </form> 
+        <>
+            <h1 className="title glow-on-hover">GO game</h1>
+            <form className="form">
+                <div className="form-list">
+                    <div className="form-item">
+                        <label htmlFor="username">Username : </label>
+                        <input className="form-input" type="text" id='userName' onChange={(e) => setUserName(e.target.value)} />
+                    </div>
+                    <div className="form-item">
+                        <label htmlFor="password">Password : </label>
+                        <input className="form-input" type="password" id='password' onChange={(e) => setPassword(e.target.value)} />
+                    </div>
+                </div>
+                <button onClick={handleLogin} className="button">Login</button>
+            </form> 
+        </>
     )
 }
 
@@ -76,15 +85,26 @@ function Register(props){
     }
 
     return (
-        <form>
-            <label htmlFor="username">Username : </label>
-            <input type="text" id='userName' onChange={(e) => setUserName(e.target.value)} /><br/>
-            <label htmlFor="password">Password : </label>
-            <input type="password" id='password' onChange={(e) => setPassword(e.target.value)} /><br/>
-            <label htmlFor="level">Level : </label>
-            <input type="text" id='level' onChange={(e) => setLevel(e.target.value)} /><br/>
-            <button onClick={handleRegister}>Register</button>
-        </form> 
+        <>
+            <h1 className="title glow-on-hover">GO game</h1>
+            <form className="form">
+                <div className="form-list">
+                    <div className="form-item">
+                        <label htmlFor="username">Username : </label>
+                        <input className="form-input" type="text" id='userName' onChange={(e) => setUserName(e.target.value)} /><br/>
+                    </div>
+                    <div className="form-item">
+                        <label htmlFor="password">Password : </label>
+                        <input className="form-input" type="password" id='password' onChange={(e) => setPassword(e.target.value)} /><br/>
+                    </div>
+                    <div className="form-item">
+                        <label htmlFor="level">Level : </label>
+                        <input className="form-input" type="text" id='level' onChange={(e) => setLevel(e.target.value)} /><br/>
+                    </div>
+                </div>
+                <button onClick={handleRegister} className="button">Register</button>
+            </form> 
+        </>
     )
 }
 

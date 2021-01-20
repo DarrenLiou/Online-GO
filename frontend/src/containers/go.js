@@ -56,7 +56,7 @@ const Go = (props) => {
 
     return (
         <div>
-            <h1 className="title">Go game</h1>
+            <h1 className="title glow-on-hover">Go game</h1>
             <h2>My color : {myColor}</h2>
             <div className="board-root">
                 <Board boardSize={boardSize} record={record} setRecord={setRecord} meToPlay={meToPlay}
