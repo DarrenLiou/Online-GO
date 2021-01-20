@@ -8,9 +8,15 @@ import { useClientSocket } from './useClientSocket.js';
 export default function App() {
   const [userId, setUserId] = useState("");
 
-  const { opponent, stepReceived, boardId, color } = useClientSocket();
-
+  const { opponent, stepReceived, boardId, color, isPlaying } = useClientSocket();
   const history = useHistory()
+  useEffect(()=>{
+      if(isPlaying){
+        history.push('/user/game')
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPlaying])
+  
   return (
     <div>
       {userId? <></> : Menu()}
@@ -23,7 +29,10 @@ export default function App() {
           <Register setUserId={setUserId} history={history}/>
         </Route>
 
-        <PrivateRoute path="/user" userId={userId} component={UserMenu}/>
+        <PrivateRoute path="/user" userId={userId} isPlaying={isPlaying} 
+        component={UserMenu} color={color} opponent={opponent} stepReceived={stepReceived}
+          boardId={boardId}
+        />
       </Switch>
     </div>
   );

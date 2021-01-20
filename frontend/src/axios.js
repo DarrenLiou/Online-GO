@@ -29,4 +29,10 @@ const findOpponent = async (userId) => {
     return data;
 }
 
-export {userLogin, userRegister, sendUserId, findOpponent};
+const makeMove = async (boardId, userId, moveData) => {
+    const {data} = await instance.post(`/user/game/move/${boardId}/${userId}`, 
+                {data: moveData});
+    console.log(data);
+}
+
+export {userLogin, userRegister, sendUserId, findOpponent, makeMove};
