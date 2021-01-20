@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {userLogin, userRegister} from '../axios'
-import { useParam, useHistory } from 'react-router-dom';
+// import { useParam, useHistory } from 'react-router-dom';
 import {sha256} from 'crypto-hash';
 
 function Login(props){
@@ -21,6 +21,17 @@ function Login(props){
                 console.log('My userId:', res.id)
                 setUserId(res.id);
                 history.push('/user');
+            }
+            else if(res.status === 'Failed'){
+                if(res.msg === 'User does not exist'){
+                    history.push('/register');
+                }
+                else{
+                    console.log('Login Error:', res.msg);
+                }
+            }
+            else{
+                throw('Login Status Error!')
             }
         }catch(err){
             console.log(err)
@@ -63,7 +74,7 @@ function Register(props){
             console.log('Authentication Error!')
         }
     }
-    
+
     return (
         <form>
             <label htmlFor="username">Username : </label>

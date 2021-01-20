@@ -8,13 +8,13 @@ import Star from '../components/star.js'
 import white_stone from '../img/white-stone.png'
 
 import '../style.css'
-import axios from 'axios'
 
 const boardSize = 19
 
 const Go = (props) => {
     const {color: myColor, opponent: myOpponentName, stepReceived: opponentStep, boardId, userId} = props;
     const [record, setRecord] = useState(Array.from(Array(boardSize), _ => Array(boardSize).fill(0))) // EMPTY, BLACK, WHITE = 0, 1, 2
+    const [stepCount, setStepCount] = useState(0);
     const [curPlayer, setCurPlayer] = useState(0) // BLACK, WHITE = 0, 1 
     const [curPosition, setCurPosition] = useState({row: -1, column: -1})
     const [color, setColor] = useState(Array.from(Array(boardSize), _ => Array(boardSize).fill(white_stone))) // EMPTY, BLACK, WHITE = 0, 1, 2
@@ -31,6 +31,12 @@ const Go = (props) => {
         }
     }, [curPosition])
 
+    useEffect(() => {
+        setStepCount(stepCount+1);
+        console.log('In use Effect props changed, opponent pos:', opponentStep);
+            
+    }, [opponentStep])
+
     return (
         <div>
             <h1 className="title">Go game</h1>
@@ -38,7 +44,7 @@ const Go = (props) => {
             <div className="board-root">
                 <Board boardSize={boardSize} record={record} setRecord={updateRecord} curPlayer={curPlayer} 
                 setCurPlayer={updateCurPlayer} curPosition={curPosition} setCurPosition={updateCurPosition}
-                color={color} setColor={updateColor} />
+                color={color} setColor={updateColor} stepCount={stepCount} setStepCount={setStepCount}/>
                 <Line boardSize={boardSize} />
                 <Index boardSize={boardSize} />
                 <Star boardSize={boardSize} />

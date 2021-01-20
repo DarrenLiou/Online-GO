@@ -43,7 +43,8 @@ app.use('/user/game', gameRouter);
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({server});
-export let clientSockets = {}
+export const clientSockets = {}
+export const userWebsocketRef = {}
 
 wss.on('connection', (ws, req) => {
     // req is now uuidv4 after sha256
@@ -58,8 +59,6 @@ wss.on('connection', (ws, req) => {
     })
     // ws.send(JSON.stringify(['connect!', req.url]))
 })
-
-
 
 server.listen(port, () => 
     console.log(`Example app listening on port ${port}`),

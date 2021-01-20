@@ -7,6 +7,7 @@ import { useClientSocket } from './useClientSocket.js';
 
 export default function App() {
   const [userId, setUserId] = useState("");
+  
 
   const { opponent, stepReceived, boardId, color, isPlaying } = useClientSocket();
   const history = useHistory()
@@ -19,14 +20,17 @@ export default function App() {
   
   return (
     <div>
-      {userId? <></> : Menu()}
+      {/* {(displayHomepage && userId === "") ? Menu(): <></>} */}
 
       <Switch>
+      <Route exact path='/'>
+        <Menu />
+      </Route>
         <Route exact path="/login">
-          <Login setUserId={setUserId} history={history}/>
+          <Login setUserId={setUserId} history={history} />
         </Route>
         <Route exact path="/register">
-          <Register setUserId={setUserId} history={history}/>
+          <Register setUserId={setUserId} history={history} />
         </Route>
 
         <PrivateRoute path="/user" userId={userId} isPlaying={isPlaying} 

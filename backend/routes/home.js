@@ -2,10 +2,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import User from '../models/user.js';
 import Game from '../models/game.js';
-import {clientSockets} from '../server.js'
+import {clientSockets, userWebsocketRef} from '../server.js'
 const router = express.Router();
 const onlinePlayers = new Set();
-export const userWebsocketRef = {}
 
 router.use(bodyParser.json());
 

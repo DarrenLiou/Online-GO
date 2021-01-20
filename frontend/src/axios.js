@@ -32,7 +32,7 @@ const findOpponent = async (userId) => {
 const makeMove = async (boardId, userId, moveData) => {
     const {data} = await instance.post(`/user/game/move/${boardId}/${userId}`, 
                 {data: moveData});
-    console.log(data);
+    console.log(data); // return if move has been made
 }
 
 export {userLogin, userRegister, sendUserId, findOpponent, makeMove};

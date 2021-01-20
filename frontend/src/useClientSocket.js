@@ -30,6 +30,8 @@ const useClientSocket = () => {
         break
       }
       case 'Step': {
+        // payload: {stoneColor: playerColor, pos: {row: row, col: col}}
+        setStepReceived(payload.pos);
         break
       }
       default:{

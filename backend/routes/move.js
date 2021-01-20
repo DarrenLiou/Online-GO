@@ -2,6 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import User from '../models/user.js';
 import Game from '../models/game.js';
+import {clientSockets, userWebsocketRef} from '../server.js'
+
 
 
 const router = express.Router();
@@ -17,7 +19,15 @@ router.post('/move/:boardId/:userId', async (req, res) => {
         // Wrong board ID
         return res.status(200).send({status: 'Failed', msg:'Board does not exist'});
     }
-    if (games[0].black.id !== userId && games[0].white.id !== userId ){
+    let playerColor = '';
+    let oppoenetID = '';
+    if (games[0].black.id === userId){
+        playerColor = 'black';
+        oppoenetID = games[0].white.id;
+    }else if(games[0].white.id === userId ){
+        playerColor = 'white';
+        oppoenetID = games[0].black.id;
+    }else{
         return res.status(200).send({status: 'Failed', msg:'User is incorrect'});
     }
     const status = req.body.data.flag
@@ -29,6 +39,8 @@ router.post('/move/:boardId/:userId', async (req, res) => {
                 {$set: {board: [...games[0].board, `${row}-${col}`], 
                         stepCount:games[0].stepCount+1 }})
             res.status(200).send({status: 'Success', msg:'Success step'});
+            try{await sendStep(oppoenetID, playerColor, row, col)}
+            catch(err){console.log("Sending move error",err)}
             break
         }
         case 'done':{
@@ -59,5 +71,10 @@ router.post('/move/:boardId/:userId', async (req, res) => {
         }
     }
 });
+
+function sendStep(userId, playerColor, row, col){
+    clientSockets[userWebsocketRef[userId]].send(JSON.stringify(['Step', 
+        {stoneColor: playerColor, pos: {row: row, col: col}}]));
+}
 
 export default router;

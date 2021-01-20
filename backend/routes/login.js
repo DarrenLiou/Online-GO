@@ -8,7 +8,7 @@ router.use(bodyParser.json());
 router.post('/login', async (req, res) => {
     console.log("Login is evoked!");
     if (req.body.data.name.length === 0){
-        res.status(405).send({status: 'Failed', msg:'User name cannot be empty'});
+        res.status(200).send({status: 'Failed', msg:'User name cannot be empty'});
     }
     else{
         try{
@@ -17,7 +17,7 @@ router.post('/login', async (req, res) => {
             if (userNum===0){
                 console.log('Login: New User');
 
-                res.status(400).send({status: 'Failed', msg:'User does not exist'});
+                res.status(200).send({status: 'Failed', msg:'User does not exist'});
             }
             else if(userNum===1){
                 // users must be length 1
@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
                     res.status(200).send({status: 'Success', id:users[0].id, msg:'Successfully login'});
                 }else{
                     console.log("login: Wrong Password");
-                    res.status(400).send({status: 'Failed', msg:'Wrong Password'});
+                    res.status(200).send({status: 'Failed', msg:'Wrong Password'});
                 }
             }
             else{
@@ -35,7 +35,7 @@ router.post('/login', async (req, res) => {
             }
         }catch(err){
             console.log(err, 'Login connect to db WRONG');
-            res.status(503).send({status: 'Failed', msg:'DB wrong'});
+            res.status(200).send({status: 'Failed', msg:'DB wrong'});
         }
     }
 });
