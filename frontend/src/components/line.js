@@ -3,9 +3,9 @@ import React from 'react'
 const Line = props => {
     const BOARD_SIZE = props.boardSize
     const lines = []
-    for (let i = 0; i < BOARD_SIZE; i++) {
+    for (let i = 0; i < BOARD_SIZE - 1; i++) {
         const column = []
-        for (let j = 0; j < BOARD_SIZE; j++) {
+        for (let j = 0; j < BOARD_SIZE - 1; j++) {
             let classes = "line-element "
 
             if (i === 0)
