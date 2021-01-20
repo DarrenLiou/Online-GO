@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {makeMove} from '../axios.js';
 
 import Board from '../components/board.js'
@@ -23,7 +23,12 @@ const Go = (props) => {
     const updateCurPlayer = newCurPlayer => setCurPlayer(newCurPlayer)
     const updateCurPosition = newPosition => setCurPosition(newPosition)
     const updateColor = newColor => setColor(newColor)
-
+    // const gridRefs = [];
+    // useEffect(()=>{
+    //     for (let i=0; i<boardSize*boardSize; i++){
+    //         gridRefs.push(useRef());
+    //     }
+    // }, [])
     useEffect(()=>{
         console.log('In use effect "go.js"', myColor, curPlayer);
         if ((curPlayer === 1 && myColor === 'black') || (curPlayer === 0 && myColor === 'white')){
