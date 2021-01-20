@@ -5,6 +5,8 @@ import { Link, Route, Switch, useHistory } from "react-router-dom";
 import { PrivateRoute} from './components/privateRoute.js';
 import { useClientSocket } from './useClientSocket.js';
 
+import go_img from './img/go-game.jpg'
+
 export default function App() {
   const [userId, setUserId] = useState("");
 
@@ -32,14 +34,15 @@ export default function App() {
 const Menu = () => {
   return (
     <>
-      <h1>GO game</h1>
+      <h1 className="title" >GO game</h1>
+      <img src={go_img} id="figure-1" />
       <nav className="navbar navbar-light">
         <ul className="nav navbar-nav">
           <li>
-            <Link to="/login">Login</Link>
+            <Link to="/login" className="nav-item">Login</Link>
           </li>
           <li>
-            <Link to="/register">Register</Link>
+            <Link to="/register" className="nav-item">Register</Link>
           </li>
         </ul>
       </nav>

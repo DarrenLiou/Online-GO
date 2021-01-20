@@ -2,8 +2,57 @@
     --BOARD_SIZE: 19;
 }
 
+body {
+    background-image: url("./img/background.jpg");
+}
+
 .title {
     text-align: center;
+    text-shadow: 3px 3px gray;
+    font-family: "Marker Felt";
+    font-size: 120px;
+    margin: 35px auto;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+}
+
+ul {
+    padding: 0;
+}
+
+nav li {
+    font-size: 24px;
+    display: inline-block;
+    padding: 80px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-color: black;
+    background-image: url("./img/button.png");
+    background-repeat: no-repeat;
+    background-size: 240px 100px;
+    background-position: center 40%;
+    border-radius: 70%;
+}
+
+nav li:hover {
+    background-image: url("./img/button-hover.jpg");
+    background-repeat: no-repeat;
+}
+
+.nav-item:hover {
+    cursor: default;
+}
+
+#figure-1 {
+    width: 50%;
+    height: 50%;
+    border-radius: 5%;
+    box-shadow: 7px 7px 3px;
+    display: block;
+    margin: 0 auto;
 }
 
 .board-root {
