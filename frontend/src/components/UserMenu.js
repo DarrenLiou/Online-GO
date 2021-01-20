@@ -14,6 +14,28 @@ function UserMenu(props){
 
     return (
         <>
+            <Route exact path={`${path}`}>
+                <UserHomePage url={url} userId={userId}/>
+            </Route>
+
+            <PrivateGameRoute path={`${path}/game`} component={GO} isPlaying={isPlaying}
+            color={color} opponent={opponent} 
+            stepReceivedStr={stepReceivedStr} boardId={boardId} userId={userId} >
+            </PrivateGameRoute>
+            <Route path={`${path}/history`}>
+
+            </Route>
+            <Route path={`${path}/profile`}>
+                
+            </Route>
+        </>
+    )
+}
+
+const UserHomePage = (props) => {
+    const {url, userId} = props;
+    return (
+        <>
             <h1 className="title glow-on-hover">GO game</h1>
             <div className="user-menu">
                 <button className="button" onClick={()=>{findOpponent(userId)}}>
@@ -26,17 +48,6 @@ function UserMenu(props){
                     <NavLink className="user-menu-text" to={`${url}/profile`}>My Profile</NavLink>
                 </button>
             </div>
-
-            <PrivateGameRoute path={`${path}/game`} component={GO} isPlaying={isPlaying}
-            color={color} opponent={opponent} 
-            stepReceivedStr={stepReceivedStr} boardId={boardId} userId={userId} >
-            </PrivateGameRoute>
-            <Route path={`${path}/history`}>
-
-            </Route>
-            <Route path={`${path}/profile`}>
-                
-            </Route>
         </>
     )
 }
