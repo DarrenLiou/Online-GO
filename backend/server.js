@@ -6,6 +6,8 @@ import loginRouter from './routes/login.js';
 import gameRouter from './routes/move.js';
 import homeRouter from './routes/home.js';
 
+import http from 'http';
+import WebSocket from 'ws';
 
 import Game from './models/game.js';
 import User from './models/user.js';
@@ -33,16 +35,28 @@ db.on('error', (error) => {
 db.once('open', () => {
     console.log('MongoDB connected!')
 });
-// app.get('/', (req, res) => {
-//     res.send('Received a GET HTTP method');
-//     console.log("GET is evoked");
-// });
-
 
 app.use('/', loginRouter);
-app.use('/game', gameRouter);
-app.use('/home', homeRouter)
+app.use('/user', homeRouter)
+app.use('/user/game', gameRouter);
 
-app.listen(port, () => 
+
+const server = http.createServer(app);
+const wss = new WebSocket.Server({server});
+let clientSockets = {}
+
+wss.on('connection', (ws, req) => {
+    let clientId = req.url.split('/')[1]; // removing '/'
+    console.log(clientId);
+    clientSockets[clientId] = ws;
+    for (let key in clientSockets){
+        clientSockets[key].send(JSON.stringify(['connect!', clientId]));
+    }
+    // ws.send(JSON.stringify(['connect!', req.url]))
+})
+
+server.listen(port, () => 
     console.log(`Example app listening on port ${port}`),
 );
+
+export {clientSockets};

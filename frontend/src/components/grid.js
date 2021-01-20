@@ -40,7 +40,7 @@ const Grid = props => {
             color[props.row][props.column] = black_stone_focus     
             props.setCurPlayer(1)
         }
-        else {
+        else { // WHITE
             record[props.row][props.column] = 2
             e.target.style["opacity"] = 1;
             if (curPosition.row !== -1 && curPosition.column !== -1)
