@@ -15,7 +15,6 @@ function UserMenu(props){
     return (
         <>
             <h1 className="title glow-on-hover">GO game</h1>
-            <h1>{isPlaying?'true':'false'}</h1>
             <div className="user-menu">
                 <button className="button" onClick={()=>{findOpponent(userId)}}>
                     <NavLink className="user-menu-text" to={`${url}/game`}>Find Opponent</NavLink>
