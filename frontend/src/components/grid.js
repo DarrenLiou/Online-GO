@@ -8,59 +8,52 @@ import empty_stone from '../img/empty-stone.png'
 import '../style.css'
 
 const Grid = props => {
+    const {row, column, boardSize, record, setRecord, meToPlay, 
+        setMeToPlay, myPosition, setMyPosition, stone, setStone, 
+        stepCount, setStepCount, myColor} = props;
+    const [myRow, myCol] = myPosition.split('@');
+
     const handleMouseEnter = e => {
-        const state = props.record[props.row][props.column]
-        const curPlayer = props.curPlayer
-        const color = props.color
+        const state = record[row][column]
         if (state === 0) {
-            color[props.row][props.column] = (curPlayer === 0)? black_stone: white_stone
-            e.target.src = color[props.row][props.column]
-            props.setColor(color)
+            stone[row][column] = (myColor==='black')? black_stone: white_stone;
+            e.target.src = stone[row][column]
+            setStone(stone)
             e.target.style["opacity"] = 0.5
         }
     }
 
     const handleMouseLeave = e => {
-        const state = props.record[props.row][props.column]
-        const color = props.color
+        const state = record[row][column]
         if (state === 0) {
-            color[props.row][props.column] = empty_stone
-            e.target.src = color[props.row][props.column]
-            props.setColor(color)
-            e.target.style["opacity"] = 0
+            stone[row][column] = empty_stone
+            e.target.src = stone[row][column]
+            setStone(stone)
+            e.target.style["opacity"] = 1
         }
     }
 
 
     const handleOnClick = e => {
-        const record = props.record
-        const curPlayer = props.curPlayer
-        const color = props.color
-        const curPosition = props.curPosition
-        const stepCount = props.stepCount
-
-        if (curPlayer === 0) { // BLACK
-            record[props.row][props.column] = 1
-            e.target.style["opacity"] = 1;
-            if (curPosition.row !== -1 && curPosition.column !== -1)
-                color[curPosition.row][curPosition.column] = white_stone       
-            color[props.row][props.column] = black_stone_focus     
-            props.setCurPlayer(1)
+        if (myColor === 'black') { // BLACK
+            record[row][column] = stepCount;
+            // e.target.style["opacity"] = 1;
+            // if (myRow !== -1 && myColumn !== -1)
+            //     color[curPosition.row][curPosition.column] = white_stone       
+            stone[row][column] = black_stone_focus     
         }
         else { // WHITE
-            record[props.row][props.column] = 2
-            e.target.style["opacity"] = 1;
-            if (curPosition.row !== -1 && curPosition.column !== -1)
-                color[curPosition.row][curPosition.column] = black_stone       
-            color[props.row][props.column] = white_stone_focus     
-            props.setCurPlayer(0)
+            record[row][column] = stepCount;
+            // e.target.style["opacity"] = 1;
+            stone[row][column] = white_stone_focus     
         }
-        props.setRecord(record)
-        props.setColor(color)
-        props.setCurPosition({row: props.row, column: props.column})
+        setMeToPlay(false);
+        setRecord(record)
+        setStone(stone)
+        setMyPosition(`${row}@${column}`)
     }
 
-    return <img src={props.color[props.row][props.column]} className="grid"
+    return <img src={stone[row][column]} className="grid"
             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleOnClick} />
 }
 

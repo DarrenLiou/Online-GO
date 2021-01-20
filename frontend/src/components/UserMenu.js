@@ -5,7 +5,7 @@ import {PrivateGameRoute} from './privateRoute.js';
 import { Route, Redirect, useRouteMatch, NavLink} from "react-router-dom";
 import GO from '../containers/go.js';
 function UserMenu(props){
-    const {userId, isPlaying, color, opponent, stepReceived, boardId} = props;
+    const {userId, isPlaying, color, opponent, stepReceivedStr, boardId} = props;
     const { url, path } = useRouteMatch();
     useEffect(()=>{
         console.log('In user Menu, userId = :', userId, webSocketId);
@@ -26,7 +26,8 @@ function UserMenu(props){
             </button>
 
             <PrivateGameRoute path={`${path}/game`} component={GO} isPlaying={isPlaying}
-            color={color} opponent={opponent} stepReceived={stepReceived} boardId={boardId} userId={userId} >
+            color={color} opponent={opponent} 
+            stepReceivedStr={stepReceivedStr} boardId={boardId} userId={userId} >
             </PrivateGameRoute>
             <Route path={`${path}/history`}>
 

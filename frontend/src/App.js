@@ -11,7 +11,7 @@ export default function App() {
   const [userId, setUserId] = useState("");
   
 
-  const { opponent, stepReceived, boardId, color, isPlaying } = useClientSocket();
+  const { opponent, stepReceivedStr, boardId, color, isPlaying } = useClientSocket();
   const history = useHistory()
   useEffect(()=>{
       if(isPlaying){
@@ -36,7 +36,9 @@ export default function App() {
         </Route>
 
         <PrivateRoute path="/user" userId={userId} isPlaying={isPlaying} 
-        component={UserMenu} color={color} opponent={opponent} stepReceived={stepReceived}
+        component={UserMenu} color={color} opponent={opponent}
+        // stepReceivedRow={stepReceivedRow} 
+        stepReceivedStr={stepReceivedStr}
           boardId={boardId}
         />
       </Switch>

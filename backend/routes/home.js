@@ -55,8 +55,8 @@ async function SendBoardData(p1, p2){
     const [p2Name, p2UserId] = p2.split("@");
     // we can random black and white
     const newBoard = new Game({ID: allGames.length+1, size: 19, board:[], 
-        white:{name: p1Name, id: p1UserId}, 
-        black:{name: p2Name, id: p2UserId}, stepCount:0, isComplete: false})
+        black:{name: p1Name, id: p1UserId}, 
+        white:{name: p2Name, id: p2UserId}, stepCount:0, isComplete: false})
     newBoard.save();
     clientSockets[userWebsocketRef[p1UserId]].send(JSON.stringify(['Board info', {color: 'black', opponentName: p2Name, boardId: newBoard.ID, boardSize: newBoard.size}]));
     clientSockets[userWebsocketRef[p2UserId]].send(JSON.stringify(['Board info', {color: 'white', opponentName: p1Name, boardId: newBoard.ID, boardSize: newBoard.size}]));
