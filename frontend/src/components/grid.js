@@ -4,6 +4,7 @@ import black_stone from '../img/black-stone.png'
 import white_stone from '../img/white-stone.png'
 import black_stone_focus from '../img/black-stone-focus.png'
 import white_stone_focus from '../img/white-stone-focus.png'
+import empty_stone from '../img/empty-stone.png'
 import '../style.css'
 
 const Grid = props => {
@@ -14,15 +15,19 @@ const Grid = props => {
         if (state === 0) {
             color[props.row][props.column] = (curPlayer === 0)? black_stone: white_stone
             e.target.src = color[props.row][props.column]
-            e.target.style["opacity"] = 0.5;
             props.setColor(color)
+            e.target.style["opacity"] = 0.5
         }
     }
 
     const handleMouseLeave = e => {
         const state = props.record[props.row][props.column]
+        const color = props.color
         if (state === 0) {
-            e.target.style["opacity"] = 0;
+            color[props.row][props.column] = empty_stone
+            e.target.src = color[props.row][props.column]
+            props.setColor(color)
+            e.target.style["opacity"] = 0
         }
     }
 

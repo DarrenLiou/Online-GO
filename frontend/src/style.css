@@ -97,7 +97,6 @@ nav li:hover {
     border-radius: 50%;
     z-index: 3;
     background-image: transparent;
-    opacity: 0;
 }
 
 .line {

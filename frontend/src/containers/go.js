@@ -6,6 +6,7 @@ import Line from '../components/line.js'
 import Index from '../components/index.js'
 import Star from '../components/star.js'
 import white_stone from '../img/white-stone.png'
+import empty_stone from '../img/empty-stone.png'
 
 import '../style.css'
 
@@ -17,7 +18,7 @@ const Go = (props) => {
     const [stepCount, setStepCount] = useState(0);
     const [curPlayer, setCurPlayer] = useState(0) // BLACK, WHITE = 0, 1 
     const [curPosition, setCurPosition] = useState({row: -1, column: -1})
-    const [color, setColor] = useState(Array.from(Array(boardSize), _ => Array(boardSize).fill(white_stone))) // EMPTY, BLACK, WHITE = 0, 1, 2
+    const [color, setColor] = useState(Array.from(Array(boardSize), _ => Array(boardSize).fill(empty_stone)))
 
     const updateRecord = newRecord => setRecord(newRecord)
     const updateCurPlayer = newCurPlayer => setCurPlayer(newCurPlayer)

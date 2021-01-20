@@ -51,12 +51,8 @@ const Menu = () => {
       <img src={go_img} id="figure-1" />
       <nav className="navbar navbar-light">
         <ul className="nav navbar-nav">
-          <li>
-            <Link to="/login" className="nav-item">Login</Link>
-          </li>
-          <li>
-            <Link to="/register" className="nav-item">Register</Link>
-          </li>
+          <Link to="/login" className="nav-item"><li>Login</li></Link>
+          <Link to="/register" className="nav-item"><li>Register</li></Link>
         </ul>
       </nav>
     </>
