@@ -6,7 +6,7 @@ const client = new WebSocket(`ws://localhost:4000/${webSocketId}`);
 
 const useClientSocket = () => {
   const [opponent, setOpponent] = useState('');
-  const [stepReceived, setStepReceived] = useState({row: -1, col: -1});
+  const [stepReceivedStr, setStepReceivedStr] = useState('-1@-1');
   const [boardId, setBoardId] = useState(-1);
   const [color, setColor] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
@@ -31,7 +31,9 @@ const useClientSocket = () => {
       }
       case 'Step': {
         // payload: {stoneColor: playerColor, pos: {row: row, col: col}}
-        setStepReceived(payload.pos);
+
+        setStepReceivedStr(payload.pos.row + '@' + payload.pos.col);
+        // setStepReceivedCol(payload.pos.col);
         break
       }
       default:{
@@ -46,7 +48,8 @@ const useClientSocket = () => {
 
   return {
     opponent,
-    stepReceived,
+    stepReceivedStr,
+    // stepReceivedCol,
     boardId,
     color,
     isPlaying
