@@ -27,7 +27,7 @@ const Grid = props => {
             color[props.row][props.column] = empty_stone
             e.target.src = color[props.row][props.column]
             props.setColor(color)
-            e.target.style["opacity"] = 0
+            e.target.style["opacity"] = 1
         }
     }
 

@@ -14,16 +14,19 @@ function UserMenu(props){
 
     return (
         <>
+            <h1 className="title glow-on-hover">GO game</h1>
             <h1>{isPlaying?'true':'false'}</h1>
-            <button onClick={()=>{findOpponent(userId)}}>
-                <NavLink to={`${url}/game`}>Find Opponent</NavLink>
-            </button>
-            <button>
-                <NavLink to={`${url}/history`}>History</NavLink>
-            </button>
-            <button>
-                <NavLink to={`${url}/profile`}>My Profile</NavLink>
-            </button>
+            <div className="user-menu">
+                <button className="button" onClick={()=>{findOpponent(userId)}}>
+                    <NavLink className="user-menu-text" to={`${url}/game`}>Find Opponent</NavLink>
+                </button>
+                <button className="button">
+                    <NavLink className="user-menu-text" to={`${url}/history`}>History</NavLink>
+                </button>
+                <button className="button">
+                    <NavLink className="user-menu-text" to={`${url}/profile`}>My Profile</NavLink>
+                </button>
+            </div>
 
             <PrivateGameRoute path={`${path}/game`} component={GO} isPlaying={isPlaying}
             color={color} opponent={opponent} stepReceived={stepReceived} boardId={boardId} userId={userId} >

@@ -10,11 +10,11 @@ const Line = props => {
 
             if (i === 0)
                 classes += "line-left "
-            if (i === BOARD_SIZE - 1)
+            if (i === BOARD_SIZE - 2)
                 classes += "line-right "
             if (j === 0)
                 classes += "line-top "
-            if (j === BOARD_SIZE - 1)
+            if (j === BOARD_SIZE - 2)
                 classes += "line-bottom "
             column.push(<div className={classes} />)
         }
