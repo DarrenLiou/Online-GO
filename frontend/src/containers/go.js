@@ -16,7 +16,7 @@ const boardSize = 19
 
 const Go = (props) => {
     const {color: myColor, opponent: myOpponentName, stepReceivedStr: opponentStepStr, 
-         boardId, userId} = props;
+         boardId, userId, history} = props;
     const [record, setRecord] = useState(Array.from(Array(boardSize), _ => Array(boardSize).fill(0))) // EMPTY, BLACK, WHITE = 0, 1, 2
     const [stepCount, setStepCount] = useState(1);
     // const [curPlayer, setCurPlayer] = useState(0) // BLACK, WHITE = 0, 1 timer running
@@ -25,11 +25,13 @@ const Go = (props) => {
     const [myPosition, setMyPosition] = useState('-1@-1');
     const [opponentPosition, setOpponentPosition] = useState('-1@-1');
     const [stone, setStone] = useState(Array.from(Array(boardSize), _ => Array(boardSize).fill(empty_stone)))
+    const [isEnd, setIsEnd] = useState(false);
 
     const makeSurrender = () => {
         console.log('Surrender Make')
         makeMove(boardId, userId, {flag: 'surrender', pos:{row: -1, col: -1} })
         setMeToPlay(false);
+        setIsEnd(true);
     }
     const makeDone = () => {
         if(!meToPlay) return;
@@ -37,7 +39,9 @@ const Go = (props) => {
         makeMove(boardId, userId, {flag: 'done', pos:{row: -1, col: -1} })
         setMeToPlay(false);
     }
-
+    const backToHome = () =>{
+        history.push('/user');
+    }
     useEffect(()=>{
         if(opponentStepStr==='-1@-1') return;
         setOpponentPosition(opponentStepStr);
@@ -85,6 +89,7 @@ const Go = (props) => {
             </div>
             <button className="surrender" onClick={makeSurrender}>Surrender</button>
             <button className="done" onClick={makeDone}>Done</button>
+            {isEnd? (<button className='backToHome' onClick={backToHome}>Back to Home</button>):(<></>)} 
         </div>
     )
 }
