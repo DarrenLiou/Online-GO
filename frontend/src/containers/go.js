@@ -76,7 +76,7 @@ const Go = (props) => {
         }
         setStone(stone)
     },[opponentStepStr])
-    
+
     useEffect(()=>{
         if(myPosition==='-1@-1')return;
         if(!meToPlay){
@@ -89,6 +89,7 @@ const Go = (props) => {
         <div>
             <h1 className="title glow-on-hover">Go game</h1>
             <h2>My color : {myColor}</h2>
+            <h2>My Opponent: {myOpponentName}</h2>
             <div className="board-root">
                 <Board boardSize={boardSize} record={record} setRecord={setRecord} meToPlay={meToPlay}
                 setMeToPlay={setMeToPlay} myPosition={myPosition} setMyPosition={setMyPosition} opponentPosition={opponentPosition}
