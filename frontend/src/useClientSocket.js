@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 export const webSocketId = 'FFF' + uuidv4() + 'FFF'
-const client = new WebSocket(`ws://localhost:4000/${webSocketId}`);
+const client = new WebSocket(`ws://localhost:6273/${webSocketId}`);
 
 const useClientSocket = () => {
   const [opponent, setOpponent] = useState('');

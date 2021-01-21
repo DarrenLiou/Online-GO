@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const instance = axios.create({ baseURL: 'http://localhost:4000'})
+const instance = axios.create({ baseURL: 'http://localhost:6273'})
 
 const userLogin = async (userData) => {
     const {data} = await instance.post('/login', { data: userData });

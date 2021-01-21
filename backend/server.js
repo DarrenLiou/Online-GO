@@ -16,7 +16,7 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 6273;
 
 if (!process.env.MONGO_URL) {
     console.error('Missing MONGO_URL!!!')
