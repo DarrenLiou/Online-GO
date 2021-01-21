@@ -9,7 +9,8 @@ import GO from '../containers/go.js';
 import waiting_img from '../img/waiting.gif';
 
 function UserMenu(props){
-    const {userId, isPlaying, color, opponent, stepReceivedStr, boardId, userName, userLevel} = props;
+    const {userId, isPlaying, color, opponent, stepReceivedStr, boardId,
+        history, userName, userLevel} = props;
     const { url, path } = useRouteMatch();
     useEffect(()=>{
         console.log('In user Menu, userId = :', userId, webSocketId);
@@ -23,7 +24,7 @@ function UserMenu(props){
             </Route>
 
             <PrivateGameRoute path={`${path}/game`} component={GO} isPlaying={isPlaying}
-            color={color} opponent={opponent} 
+            color={color} opponent={opponent} history={history}
             stepReceivedStr={stepReceivedStr} boardId={boardId} userId={userId} >
             </PrivateGameRoute>
             <Route path={`${path}/history`}>

@@ -16,7 +16,7 @@ const boardSize = 19
 
 const Go = (props) => {
     const {color: myColor, opponent: myOpponentName, stepReceivedStr: opponentStepStr, 
-         boardId, userId} = props;
+         boardId, userId, history} = props;
     const [record, setRecord] = useState(Array.from(Array(boardSize), _ => Array(boardSize).fill(0))) // EMPTY, BLACK, WHITE = 0, 1, 2
     const [stepCount, setStepCount] = useState(1);
     // const [curPlayer, setCurPlayer] = useState(0) // BLACK, WHITE = 0, 1 timer running
@@ -25,11 +25,15 @@ const Go = (props) => {
     const [myPosition, setMyPosition] = useState('-1@-1');
     const [opponentPosition, setOpponentPosition] = useState('-1@-1');
     const [stone, setStone] = useState(Array.from(Array(boardSize), _ => Array(boardSize).fill(empty_stone)))
+    const [isEnd, setIsEnd] = useState(false);
+    const [isWin, setIsWin] = useState("");
 
     const makeSurrender = () => {
         console.log('Surrender Make')
         makeMove(boardId, userId, {flag: 'surrender', pos:{row: -1, col: -1} })
         setMeToPlay(false);
+        setIsEnd(true);
+        setIsWin('Lose');
     }
     const makeDone = () => {
         if(!meToPlay) return;
@@ -37,11 +41,19 @@ const Go = (props) => {
         makeMove(boardId, userId, {flag: 'done', pos:{row: -1, col: -1} })
         setMeToPlay(false);
     }
-
+    const backToHome = () =>{
+        history.push('/user');
+    }
     useEffect(()=>{
         if(opponentStepStr==='-1@-1') return;
+        console.log('opponent string', opponentStepStr)
         setOpponentPosition(opponentStepStr);
         const [opponentRow, opponentCol] = opponentStepStr.split('@');
+        if(opponentRow === 's'){
+            setIsEnd(true);
+            setIsWin('Win');
+            return;
+        }
         const [myCurRow, myCurCol] = myPosition.split('@');
         record[opponentRow][opponentCol] = stepCount;
         setStepCount(stepCount+1);
@@ -84,9 +96,18 @@ const Go = (props) => {
                 <Star boardSize={boardSize} />
             </div>
             <button className="surrender" onClick={makeSurrender}>Surrender</button>
-            <button className="done" onClick={makeDone}>Done</button>
+            {/* <button className="done" onClick={makeDone}>Done</button> */}
+            {isEnd? (<button className='backToHome' onClick={backToHome}>Back to Home</button>):(<></>)} 
+            {isWin===''?(<></>): (<WinStatus isWin={isWin}/>)}
         </div>
     )
 }
-
+const WinStatus = (props) => {
+    const {isWin} = props;
+    return(
+        <>
+            <h1>{isWin}</h1>
+        </>
+    )
+}
 export default Go

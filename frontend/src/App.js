@@ -39,7 +39,7 @@ export default function App() {
         <PrivateRoute path="/user" userId={userId} isPlaying={isPlaying} 
         component={UserMenu} color={color} opponent={opponent}
         // stepReceivedRow={stepReceivedRow} 
-        stepReceivedStr={stepReceivedStr}
+        stepReceivedStr={stepReceivedStr} history={history}
           boardId={boardId} userName={userName} userLevel={userLevel}
         />
       </Switch>
