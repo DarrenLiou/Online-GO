@@ -39,7 +39,7 @@ router.post('/move/:boardId/:userId', async (req, res) => {
                 {$set: {board: [...games[0].board, `${row}-${col}`], 
                         stepCount:games[0].stepCount+1 }})
             res.status(200).send({status: 'Success', msg:'Success step'});
-            try{await sendStep(opponentID, playerColor, row, col)}
+            try{ sendStep(opponentID, playerColor, row, col)}
             catch(err){console.log("Sending move error",err)}
             break
         }
@@ -48,6 +48,8 @@ router.post('/move/:boardId/:userId', async (req, res) => {
                 {$set: {board: [...games[0].board, `0-D`], 
                         stepCount:games[0].stepCount+1 }})
             res.status(200).send({status: 'Success', msg:'Success done'});
+            try{ sendDone(opponentID, playerColor)}
+            catch(err){console.log("Sending done error",err)}
             break
         }
         case 'surrender':{
@@ -62,6 +64,8 @@ router.post('/move/:boardId/:userId', async (req, res) => {
                         stepCount:games[0].stepCount+1,
                         isComplete: true, winner: winner}})
             res.status(200).send({status: 'Success', msg:'Success surrender'});
+            try{ sendSurrender(opponentID, playerColor)}
+            catch(err){console.log("Sending surrender error",err)}
             break
         }
         default:{
@@ -73,9 +77,18 @@ router.post('/move/:boardId/:userId', async (req, res) => {
 });
 
 function sendStep(userId, playerColor, row, col){
-    console.log('-----------send from web socket server--------------')
+    console.log('-----------send step from web socket server--------------')
     clientSockets[userWebsocketRef[userId]].send(JSON.stringify(['Step', 
         {stoneColor: playerColor, pos: {row: row, col: col}, userId: userId}]));
 }
-
+function sendSurrender(userId, playerColor){
+    console.log('-----------send surrender from web socket server--------------')
+    clientSockets[userWebsocketRef[userId]].send(JSON.stringify(['Surrender', 
+        {stoneColor: playerColor, pos: {row: -1, col: -1}, userId: userId}]));
+}
+function sendDone(userId, playerColor){
+    console.log('-----------send surrender from web socket server--------------')
+    clientSockets[userWebsocketRef[userId]].send(JSON.stringify(['Done', 
+        {stoneColor: playerColor, pos: {row: -1, col: -1}, userId: userId}]));
+}
 export default router;

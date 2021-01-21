@@ -344,6 +344,14 @@ nav li:hover {
     opacity: 1;
 }
 
+.surrender {
+    float: right;
+}
+
+.done {
+    float: right;
+}
+
 .glow-on-hover {
     width: 75%;
     border: none;

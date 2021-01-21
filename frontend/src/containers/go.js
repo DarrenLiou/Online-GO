@@ -26,35 +26,17 @@ const Go = (props) => {
     const [opponentPosition, setOpponentPosition] = useState('-1@-1');
     const [stone, setStone] = useState(Array.from(Array(boardSize), _ => Array(boardSize).fill(empty_stone)))
 
-    // const updateRecord = newRecord => setRecord(newRecord)
-    // const updateCurPlayer = newCurPlayer => setCurPlayer(newCurPlayer)
-    // const updateCurPosition = newPosition => setMyPo(newPosition)
-    // const updateColor = newColor => setColor(newColor)
-    // const gridRefs = [];
-    // useEffect(()=>{
-    //     for (let i=0; i<boardSize*boardSize; i++){
-    //         gridRefs.push(useRef());
-    //     }
-    // }, [])
+    const makeSurrender = () => {
+        console.log('Surrender Make')
+        makeMove(boardId, userId, {flag: 'surrender', pos:{row: -1, col: -1} })
+        setMeToPlay(false);
+    }
+    const makeDone = () => {
+        console.log('Done Make')
+        makeMove(boardId, userId, {flag: 'done', pos:{row: -1, col: -1} })
+        setMeToPlay(false);
+    }
 
-    // useEffect(()=>{
-    //     if (curPosition.row === -1) return;
-    //     console.log('In use effect "go.js"', myColor, curPlayer);
-    //     if ((curPlayer === 1 && myColor === 'black') || (curPlayer === 0 && myColor === 'white')){
-    //         makeMove(boardId, userId, {flag: 'step', pos:{row: curPosition.row, col: curPosition.column} })
-    //     }
-    // }, [curPosition])
-
-    // useEffect(() => {
-    //     if (opponentStepStr === '-1@-1') return;
-    //     console.log('In use Effect props changed, opponent pos:', opponentStepStr);
-    //     // setStepCount(stepCount+1);
-    //     const [row, col] = opponentStepStr.split('@');
-    //     setCurPosition({row: row, column: col});
-    //     // setCurPlayer(1-curPlayer);
-    //     // if 
-    //     // color[opponentStep.row][opponentStep.col] = 
-    // }, [opponentStepStr])
     useEffect(()=>{
         if(opponentStepStr==='-1@-1') return;
         setOpponentPosition(opponentStepStr);
@@ -98,6 +80,8 @@ const Go = (props) => {
                 <Index boardSize={boardSize} />
                 <Star boardSize={boardSize} />
             </div>
+            <button className="surrender" onClick={makeSurrender}>Surrender</button>
+            <button className="done" onClick={makeSurrender}>Done</button>
         </div>
     )
 }
