@@ -20,7 +20,7 @@ function Login(props){
     
         switch (msg.status) {
             case 'Success':{
-                message.success(content)
+                message.success(msg.msg, 0.5)
                 console.log('------Success---------')                
             }
             break

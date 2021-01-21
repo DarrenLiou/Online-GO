@@ -177,6 +177,29 @@ nav li:hover {
     width: 100%;
     font-size: 25px;
     font-family: "Marker Felt";
+    opacity: 1;
+    animation: fadeout 2s forwards;
+    -webkit-animation: fadeout 2s forwards;
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }
 
 .board-root {
