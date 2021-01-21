@@ -9,9 +9,10 @@ import go_img from './img/go-game.jpg'
 
 export default function App() {
   const [userId, setUserId] = useState("");
-  
+  const [userName, setProfileUserName] = useState("");
+  const [userLevel, setProfileUserLevel] = useState("");
 
-  const { opponent, stepReceived, boardId, color, isPlaying } = useClientSocket();
+  const { opponent, stepReceivedStr, boardId, color, isPlaying } = useClientSocket();
   const history = useHistory()
   useEffect(()=>{
       if(isPlaying){
@@ -29,15 +30,17 @@ export default function App() {
         <Menu />
       </Route>
         <Route exact path="/login">
-          <Login setUserId={setUserId} history={history} />
+          <Login setUserId={setUserId} history={history} setProfileUserName={setProfileUserName} setProfileUserLevel={setProfileUserLevel}/>
         </Route>
         <Route exact path="/register">
           <Register setUserId={setUserId} history={history} />
         </Route>
 
         <PrivateRoute path="/user" userId={userId} isPlaying={isPlaying} 
-        component={UserMenu} color={color} opponent={opponent} stepReceived={stepReceived}
-          boardId={boardId}
+        component={UserMenu} color={color} opponent={opponent}
+        // stepReceivedRow={stepReceivedRow} 
+        stepReceivedStr={stepReceivedStr}
+          boardId={boardId} userName={userName} userLevel={userLevel}
         />
       </Switch>
     </div>
@@ -47,16 +50,12 @@ export default function App() {
 const Menu = () => {
   return (
     <>
-      <h1 className="title" >GO game</h1>
+      <h1 className="title glow-on-hover" >GO game</h1>
       <img src={go_img} id="figure-1" />
       <nav className="navbar navbar-light">
         <ul className="nav navbar-nav">
-          <li>
-            <Link to="/login" className="nav-item">Login</Link>
-          </li>
-          <li>
-            <Link to="/register" className="nav-item">Register</Link>
-          </li>
+          <Link to="/login" className="nav-item"><li>Login</li></Link>
+          <Link to="/register" className="nav-item"><li>Register</li></Link>
         </ul>
       </nav>
     </>

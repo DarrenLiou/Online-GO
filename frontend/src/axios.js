@@ -30,6 +30,7 @@ const findOpponent = async (userId) => {
 }
 
 const makeMove = async (boardId, userId, moveData) => {
+    console.log('------make move by:', userId)
     const {data} = await instance.post(`/user/game/move/${boardId}/${userId}`, 
                 {data: moveData});
     console.log(data); // return if move has been made

@@ -24,7 +24,7 @@ router.post('/login', async (req, res) => {
                 // await User.updateOne({name: req.body.data.name}, {$set: {toPlay:false}})
                 if (req.body.data.password === users[0].password){
                     console.log("login: Successfully login");
-                    res.status(200).send({status: 'Success', id:users[0].id, msg:'Successfully login'});
+                    res.status(200).send({status: 'Success', id:users[0].id, userName:users[0].name , userLevel:users[0].level , msg:'Successfully login'});
                 }else{
                     console.log("login: Wrong Password");
                     res.status(200).send({status: 'Failed', msg:'Wrong Password'});
@@ -43,7 +43,7 @@ router.post('/login', async (req, res) => {
 router.post('/register', async (req, res) => {
     console.log("Register is evoked!");
     if (req.body.data.name.length === 0){
-        res.status(405).send({status: 'Failed', msg:'User name cannot be empty'});
+        res.status(200).send({status: 'Failed', msg:'User name cannot be empty'});
     }
     else{
         try{
@@ -53,7 +53,7 @@ router.post('/register', async (req, res) => {
                 console.log('Register: New User');
                 if (req.body.data.name.indexOf("@") !== -1){
                     console.log('User name cannot contain @')
-                    return res.status(400).send({status: 'Failed', msg:'User name cannot contain @'});
+                    return res.status(200).send({status: 'Failed', msg:'User name cannot contain @'});
                 }
                 req.body.data.id = uuidv4();
                 const user = new User(req.body.data);
@@ -64,16 +64,16 @@ router.post('/register', async (req, res) => {
                     console.log(err)
                 }
                 console.log('Success registration');
-                res.status(200).send({status: 'Success', id:user.id, msg:'Success registration'});
+                res.status(200).send({status: 'Success', id:user.id, userName:req.body.data.name, userLevel:req.body.data.level, msg:'Success registration'});
             }
             else if(userNum===1){
                 // await User.updateOne({name: req.body.data.name}, {$set: {toPlay:false}})
                 if (req.body.data.password === users[0].password){
                     console.log("Register: Successfully login");
-                    res.status(200).send({status: 'Success', id:users[0].id, msg:'Exists'});
+                    res.status(200).send({status: 'Success', id:users[0].id, userName:users[0].name , userLevel:users[0].level, msg:'Exists'});
                 }else{
                     console.log("Register: Wrong Password");
-                    res.status(400).send({status: 'Failed', msg:'Wrong Password'});
+                    res.status(200).send({status: 'Failed', msg:'Wrong Password'});
                 }
                 // res.status(200).send({status: 'Success', id:users[0].id, msg:'Exists'});
             }else{
@@ -81,7 +81,7 @@ router.post('/register', async (req, res) => {
             }
         }catch(err){
             console.log('Register connect to db WRONG');
-            res.status(503).send({status: 'Failed', msg:'DB wrong'});
+            res.status(200).send({status: 'Failed', msg:'DB wrong'});
         }
     }
 });

@@ -5,11 +5,11 @@ const Index = props => {
     const numbers = []
     const alphabets = []
     for (let i = 0; i < BOARD_SIZE; i++) {
-        numbers.push(<div className="index-element">{BOARD_SIZE - i}</div>)
+        numbers.push(<div className="index-element" key={i+'N'}>{BOARD_SIZE - i}</div>)
         if (i <= 7)
-            alphabets.push(<div className="index-element">{String.fromCharCode(65 + i)}</div>)
+            alphabets.push(<div className="index-element" key={i}>{String.fromCharCode(65 + i)}</div>)
         else
-            alphabets.push(<div className="index-element">{String.fromCharCode(66 + i)}</div>)
+            alphabets.push(<div className="index-element" key={i}>{String.fromCharCode(66 + i)}</div>)
     }
 
     return (

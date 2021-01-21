@@ -20,13 +20,13 @@ router.post('/move/:boardId/:userId', async (req, res) => {
         return res.status(200).send({status: 'Failed', msg:'Board does not exist'});
     }
     let playerColor = '';
-    let oppoenetID = '';
+    let opponentID = '';
     if (games[0].black.id === userId){
         playerColor = 'black';
-        oppoenetID = games[0].white.id;
+        opponentID = games[0].white.id;
     }else if(games[0].white.id === userId ){
         playerColor = 'white';
-        oppoenetID = games[0].black.id;
+        opponentID = games[0].black.id;
     }else{
         return res.status(200).send({status: 'Failed', msg:'User is incorrect'});
     }
@@ -39,7 +39,7 @@ router.post('/move/:boardId/:userId', async (req, res) => {
                 {$set: {board: [...games[0].board, `${row}-${col}`], 
                         stepCount:games[0].stepCount+1 }})
             res.status(200).send({status: 'Success', msg:'Success step'});
-            try{await sendStep(oppoenetID, playerColor, row, col)}
+            try{await sendStep(opponentID, playerColor, row, col)}
             catch(err){console.log("Sending move error",err)}
             break
         }
@@ -73,8 +73,9 @@ router.post('/move/:boardId/:userId', async (req, res) => {
 });
 
 function sendStep(userId, playerColor, row, col){
+    console.log('-----------send from web socket server--------------')
     clientSockets[userWebsocketRef[userId]].send(JSON.stringify(['Step', 
-        {stoneColor: playerColor, pos: {row: row, col: col}}]));
+        {stoneColor: playerColor, pos: {row: row, col: col}, userId: userId}]));
 }
 
 export default router;
