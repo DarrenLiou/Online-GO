@@ -33,7 +33,7 @@ export default function App() {
           <Login setUserId={setUserId} history={history} setProfileUserName={setProfileUserName} setProfileUserLevel={setProfileUserLevel}/>
         </Route>
         <Route exact path="/register">
-          <Register setUserId={setUserId} history={history} />
+          <Register setUserId={setUserId} history={history} setProfileUserName={setProfileUserName} setProfileUserLevel={setProfileUserLevel} />
         </Route>
 
         <PrivateRoute path="/user" userId={userId} isPlaying={isPlaying} 
