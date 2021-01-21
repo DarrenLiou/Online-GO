@@ -1,7 +1,7 @@
 # Online-GO
 
 # [109-1] Web Programming Final 
-## (Group 36) Online Gomoku
+## (Group 63) Online Gomoku
 
 - Deployed Link: http://linux11.csie.ntu.edu.tw:3000
 - Demo Link: https://www.youtube.com/watch?v=FC0qcDoEt5g&feature=youtu.be
