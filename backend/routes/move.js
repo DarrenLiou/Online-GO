@@ -84,11 +84,11 @@ function sendStep(userId, playerColor, row, col){
 function sendSurrender(userId, playerColor){
     console.log('-----------send surrender from web socket server--------------')
     clientSockets[userWebsocketRef[userId]].send(JSON.stringify(['Surrender', 
-        {stoneColor: playerColor, pos: {row: -1, col: -1}, userId: userId}]));
+        {stoneColor: playerColor, pos: {row: 's', col: 's'}, userId: userId}]));
 }
 function sendDone(userId, playerColor){
     console.log('-----------send surrender from web socket server--------------')
     clientSockets[userWebsocketRef[userId]].send(JSON.stringify(['Done', 
-        {stoneColor: playerColor, pos: {row: -1, col: -1}, userId: userId}]));
+        {stoneColor: playerColor, pos: {row: 'd', col: 'd'}, userId: userId}]));
 }
 export default router;

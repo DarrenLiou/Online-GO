@@ -26,12 +26,14 @@ const Go = (props) => {
     const [opponentPosition, setOpponentPosition] = useState('-1@-1');
     const [stone, setStone] = useState(Array.from(Array(boardSize), _ => Array(boardSize).fill(empty_stone)))
     const [isEnd, setIsEnd] = useState(false);
+    const [isWin, setIsWin] = useState("");
 
     const makeSurrender = () => {
         console.log('Surrender Make')
         makeMove(boardId, userId, {flag: 'surrender', pos:{row: -1, col: -1} })
         setMeToPlay(false);
         setIsEnd(true);
+        setIsWin('Lose');
     }
     const makeDone = () => {
         if(!meToPlay) return;
@@ -44,8 +46,14 @@ const Go = (props) => {
     }
     useEffect(()=>{
         if(opponentStepStr==='-1@-1') return;
+        console.log('opponent string', opponentStepStr)
         setOpponentPosition(opponentStepStr);
         const [opponentRow, opponentCol] = opponentStepStr.split('@');
+        if(opponentRow === 's'){
+            setIsEnd(true);
+            setIsWin('Win');
+            return;
+        }
         const [myCurRow, myCurCol] = myPosition.split('@');
         record[opponentRow][opponentCol] = stepCount;
         setStepCount(stepCount+1);
@@ -88,10 +96,18 @@ const Go = (props) => {
                 <Star boardSize={boardSize} />
             </div>
             <button className="surrender" onClick={makeSurrender}>Surrender</button>
-            <button className="done" onClick={makeDone}>Done</button>
+            {/* <button className="done" onClick={makeDone}>Done</button> */}
             {isEnd? (<button className='backToHome' onClick={backToHome}>Back to Home</button>):(<></>)} 
+            {isWin===''?(<></>): (<WinStatus isWin={isWin}/>)}
         </div>
     )
 }
-
+const WinStatus = (props) => {
+    const {isWin} = props;
+    return(
+        <>
+            <h1>{isWin}</h1>
+        </>
+    )
+}
 export default Go
