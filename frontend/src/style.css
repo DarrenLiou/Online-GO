@@ -5,7 +5,6 @@
 
 body {
     background-image: url("./img/background.jpg");
-    font-family: "Marker Felt";
 }
 
 *:focus {
@@ -22,6 +21,7 @@ h1.title {
 
 h2.title {
     font-size: 80px;
+    font-family: "Marker Felt";
 }
 
 .profile {
@@ -30,12 +30,14 @@ h2.title {
     margin: 0px auto;
     justify-content: flex-start;
     flex-direction: column;
+    font-family: "Marker Felt";
 }
 
 h3.title {
     margin-top: 0px;
     font-size: 40px;
     text-align: left;
+    font-family: "Marker Felt";
 }
 
 .navbar {
@@ -163,18 +165,31 @@ nav li:hover {
 }
 
 .game-info {
-    text-align: center;
+    text-align: left;
+    float: right;
+    padding-right: 12%;
+    font-family: "Marker Felt";
+}
+
+.ant-message {
+    position: fixed;
+    bottom: 5%;
+    width: 100%;
+    font-size: 25px;
+    font-family: "Marker Felt";
 }
 
 .board-root {
     width: 640px;
     height: 640px;
     position: relative;
-    margin: auto;
+    margin: 0 auto;
+    left: 13%;
     background-image: url("./img/wood-1.jpg");
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0px 0px 100px gray;
 }
 
 .board {
@@ -292,6 +307,7 @@ nav li:hover {
 .index-element {
     font-size: large;
     font-weight: bolder;
+    font-family: "Marker Felt";
 }
 
 .star {

@@ -42,6 +42,8 @@ const UserHomePage = (props) => {
 
     const handleOnClick = e => {
         findOpponent(userId);
+        setWait(true);
+        console.log(wait);
     }
 
     return (
@@ -49,7 +51,7 @@ const UserHomePage = (props) => {
             <h1 className="title glow-on-hover">GO game</h1>
             <div className="user-menu">
                 <NavLink className="button" to={`${url}/game`}>
-                    <div className="user-menu-text" onClick={handleOnClick()}>Find Opponent</div>
+                    <div className="user-menu-text" onClick={e => handleOnClick(e)}>Find Opponent</div>
                 </NavLink>
                 <NavLink className="button" to={`${url}/history`}>
                     <div className="user-menu-text">History</div>
