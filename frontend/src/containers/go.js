@@ -32,6 +32,7 @@ const Go = (props) => {
         setMeToPlay(false);
     }
     const makeDone = () => {
+        if(!meToPlay) return;
         console.log('Done Make')
         makeMove(boardId, userId, {flag: 'done', pos:{row: -1, col: -1} })
         setMeToPlay(false);
@@ -83,7 +84,7 @@ const Go = (props) => {
                 <Star boardSize={boardSize} />
             </div>
             <button className="surrender" onClick={makeSurrender}>Surrender</button>
-            <button className="done" onClick={makeSurrender}>Done</button>
+            <button className="done" onClick={makeDone}>Done</button>
         </div>
     )
 }
