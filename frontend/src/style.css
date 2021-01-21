@@ -178,8 +178,8 @@ nav li:hover {
     font-size: 25px;
     font-family: "Marker Felt";
     opacity: 1;
-    animation: fadeout 2s forwards;
-    -webkit-animation: fadeout 2s forwards;
+    animation: fadeout 3s forwards;
+    -webkit-animation: fadeout 3s forwards;
 }
 
 @-webkit-keyframes fadeout {
@@ -200,6 +200,15 @@ nav li:hover {
     to {
         opacity: 0;
     }
+}
+
+.wait-img {
+    margin: 0 auto;
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-image: url("./img/waiting.gif");
+    background-repeat: no-repeat;
 }
 
 .board-root {
@@ -383,12 +392,34 @@ nav li:hover {
     opacity: 1;
 }
 
-.surrender {
+.go-button-root {
     float: right;
+    padding-top: 0;
+    margin-right: 13%;
+    position: relative;
 }
 
-.done {
+.go-button {
+    margin-bottom: 10px;
     float: right;
+    background-color: lightgray;
+    font-size: 26px;
+    font-family: "Marker Felt";
+    font-color: white;
+    padding: 5px;
+    z-index: 5;
+}
+
+.go-button:hover {
+    background-color: darkgray;
+    font-color: white;
+}
+
+.you-win {
+    position: absolute;
+    display: inline-block;
+    margin: 2% auto;
+    margin-left: 7%;
 }
 
 .glow-on-hover {

@@ -95,9 +95,14 @@ const Go = (props) => {
                 <Index boardSize={boardSize} />
                 <Star boardSize={boardSize} />
             </div>
-            <button className="surrender" onClick={makeSurrender}>Surrender</button>
-            {/* <button className="done" onClick={makeDone}>Done</button> */}
-            {isEnd? (<button className='backToHome' onClick={backToHome}>Back to Home</button>):(<></>)} 
+            <div className="go-button-root">
+                <div onClick={makeSurrender}>
+                    <button className="go-button">Surrender</button>
+                </div>
+                <div onClick={backToHome}>
+                    {isEnd? (<button className="go-button">Back to Home</button>):(<></>)} 
+                </div>
+            </div>
             {isWin===''?(<></>): (<WinStatus isWin={isWin}/>)}
         </div>
     )
@@ -106,7 +111,7 @@ const WinStatus = (props) => {
     const {isWin} = props;
     return(
         <>
-            <h1>{isWin}</h1>
+            <h1 className="you-win">{"You " + isWin}</h1>
         </>
     )
 }
