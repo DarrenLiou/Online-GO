@@ -6,6 +6,7 @@ import {History} from './history.js';
 import {MyProfile} from './myProfile.js';
 import { Route, Redirect, useRouteMatch, NavLink} from "react-router-dom";
 import GO from '../containers/go.js';
+import waiting_img from '../img/waiting.gif';
 
 function UserMenu(props){
     const {userId, isPlaying, color, opponent, stepReceivedStr, boardId, userName, userLevel} = props;
@@ -37,20 +38,27 @@ function UserMenu(props){
 
 const UserHomePage = (props) => {
     const {url, userId} = props;
+    const [wait, setWait] = useState(false);
+
+    const handleOnClick = e => {
+        findOpponent(userId);
+    }
+
     return (
         <>
             <h1 className="title glow-on-hover">GO game</h1>
             <div className="user-menu">
-                <button className="button" onClick={()=>{findOpponent(userId)}}>
-                    <NavLink className="user-menu-text" to={`${url}/game`}>Find Opponent</NavLink>
-                </button>
-                <button className="button">
-                    <NavLink className="user-menu-text" to={`${url}/history`}>History</NavLink>
-                </button>
-                <button className="button">
-                    <NavLink className="user-menu-text" to={`${url}/profile`}>My Profile</NavLink>
-                </button>
+                <NavLink className="button" to={`${url}/game`}>
+                    <div className="user-menu-text" onClick={handleOnClick()}>Find Opponent</div>
+                </NavLink>
+                <NavLink className="button" to={`${url}/history`}>
+                    <div className="user-menu-text">History</div>
+                </NavLink>
+                <NavLink className="button" to={`${url}/profile`}>
+                    <div className="user-menu-text">My Profile</div>
+                </NavLink>
             </div>
+            <img src={wait? waiting_img : ''} />
         </>
     )
 }

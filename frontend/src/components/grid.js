@@ -39,6 +39,7 @@ const Grid = props => {
     const handleOnClick = e => {
         const [opponentRow, opponentCol] = opponentPosition.split('@');
         if(!meToPlay)return;
+        if(record[row][column] !== 0)return;
         if (myColor === 'black') { // BLACK
             record[row][column] = stepCount;
             e.target.style["opacity"] = 1;    

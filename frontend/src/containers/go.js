@@ -87,8 +87,8 @@ const Go = (props) => {
 
     return (
         <div>
-            <h1 className="title glow-on-hover">Go game</h1>
-            <h2>My color : {myColor}</h2>
+            <h1 className="title glow-on-hover">GO game</h1>
+            <h2 className="my-color">My color : {myColor}</h2>
             <div className="board-root">
                 <Board boardSize={boardSize} record={record} setRecord={setRecord} meToPlay={meToPlay}
                 setMeToPlay={setMeToPlay} myPosition={myPosition} setMyPosition={setMyPosition} opponentPosition={opponentPosition}
